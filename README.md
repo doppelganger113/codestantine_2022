@@ -2,8 +2,6 @@
 
 Main business logic service for Demo.
 
-![Pipeline status](https://gitlab.com/intelligence-bunker/api/badges/master/pipeline.svg "Pipeline status")
-
 <div align="center">
     <img src="./assets/go_logo.png" align="center" width="200" alt="Go" />
 </div>
@@ -47,7 +45,7 @@ Configuration of the application is done through the environment variables, whic
 | AWS_USER_POOL_ID                | **Required** |                  | Example: `eu-central-1_somenumber`                                                                                                                                                     |
 | AWS_ACCESS_KEY_ID               | **Required** |                  | AWS IAM key id used for API to talk with AWS services                                                                                                                                  |
 | AWS_SECRET_ACCESS_KEY           | **Required** |                  | Secret for the above key                                                                                                                                                               |
-| DATABASE_URL                    | **Required** |                  | Example `postgresql://postgres:example@localhost/bunker_test_db?sslmode=disable`                                                                                                       |
+| DATABASE_URL                    | **Required** |                  | Example `postgresql://postgres:example@localhost/demo?sslmode=disable`                                                                                                                 |
 | IMAGES_API_DOMAIN               | **Required** |                  | Endpoint for the image service API                                                                                                                                                     |
 | CORS_ALLOW_ORIGINS              | **Required** |                  | List of origins to allow CORS in format: `first.com, second.com, etc.com` or `http://localhost:4200`                                                                                   |
 | SQS_POST_AUTH_URL               | **Required** |                  | Url of the SQS queue                                                                                                                                                                   |
@@ -64,7 +62,7 @@ Configuration of the application is done through the environment variables, whic
 
 ### Development requirements
 
-- Go v1.15+
+- Go v1.18+
 - PostgreSQL
 - Docker and docker-compose
 
@@ -109,9 +107,6 @@ redirection url for OAuth2.
 - github.com/getkin/kin-openapi/openapi3
 - github.com/getkin/kin-openapi/openapi3gen
 
-Documentation is added/updated in `internal/api/http-transport/openapi3.go`, served via
-`internal/api/http-transport/handler_openapi3.go` with swagger UI located in `internal/api/http-transport/docs`.
-
 ## Testing
 
 ### Test configuration
@@ -119,7 +114,7 @@ Documentation is added/updated in `internal/api/http-transport/openapi3.go`, ser
 Ensure that you set the `DATABASE_TEST_URL` environment variable, reason for new one is for safety reasons.
 
 ```bash
-export DATABASE_TEST_URL=postgresql://postgres:example@localhost/bunker_test?sslmode=disable
+export DATABASE_TEST_URL=postgresql://postgres:example@localhost/demo?sslmode=disable
 
 # Also, disable the pooling, we don't need it for testing
 export SQS_POST_AUTH_CONSUMER_DISABLED=true
@@ -148,7 +143,7 @@ Ensure that you run the migrations before running end-to-end tests.
 To run the migrations, you must set the database connection url through environment variable:
 
 ```bash
-export DATABASE_URL=postgresql://postgres:example@localhost/bunker_test?sslmode=disable
+export DATABASE_URL=postgresql://postgres:example@localhost/demo?sslmode=disable
 ```
 
 Note that the `sslmode=disable` is for local development only, for production you should use ssl encryption.
@@ -181,7 +176,7 @@ CI/CD is currently on the Heroku and additional options that were added for it a
 1. Build phase
 
 ```text
-// +heroku goVersion 1.15
+// +heroku goVersion 1.18
 // +heroku install ./cmd/...
 ```
 
