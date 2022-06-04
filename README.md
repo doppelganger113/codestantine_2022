@@ -109,32 +109,9 @@ redirection url for OAuth2.
 
 ## Testing
 
-### Test configuration
-
-Ensure that you set the `DATABASE_TEST_URL` environment variable, reason for new one is for safety reasons.
-
-```bash
-export DATABASE_TEST_URL=postgresql://postgres:example@localhost/demo?sslmode=disable
-
-# Also, disable the pooling, we don't need it for testing
-export SQS_POST_AUTH_CONSUMER_DISABLED=true
-```
-
 ### Unit testing
 
 - `make test`
-
-### Integration testing
-
-Unit testing **with** integration testing
-
-- `export TEST_INTEGRATION=true`
-- `make test`
-
-### Testing in CI/CD
-
-Ensure that you run the migrations before running end-to-end tests.
-`TBD: create separate e2e test execution`
 
 ## Migrations
 

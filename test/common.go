@@ -75,6 +75,7 @@ func CreateMultipartFormData(
 	return body, contentType, nil
 }
 
+// TimeoutInterrupt - creates a function that sends an interrupt signal after a period of time
 func TimeoutInterrupt(timeout time.Duration) signaling.Interrupter {
 	return func(err chan<- error) {
 		time.Sleep(timeout)
